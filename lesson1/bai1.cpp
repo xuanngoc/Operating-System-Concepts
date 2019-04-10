@@ -4,14 +4,15 @@ using namespace std;
 
 int main()
 {
-    const char *a = "dirSample";
-    DIR *dir = 0;
-    dir = opendir(a);
-    if(dir){
+    const char *rootDir = "."; // I will check this directiry
+    DIR *dir = 0; //null
+    dir = opendir(rootDir);
+    /* if(dir){
         cout<<"It works!\n\n";
-    }
+    } */
     struct dirent *pent = 0;
     
+    cout<<"List directories: \n";
     while(pent = readdir(dir)){
         if(pent == 0){
             cout<<"Error\n";
