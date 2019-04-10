@@ -1,4 +1,6 @@
-# Operating-System-Concepts
-## A32007 
-## Bùi Xuân Ngọc
-## TLU
+# Operating System Concepts
+---
+## Thang Long University
+### A32007 - Bùi Xuân Ngọc
+
+
