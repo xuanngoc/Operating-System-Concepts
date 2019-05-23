@@ -32,6 +32,17 @@ void *runner(void *param){
     pthread_exit(0);
 
 }
+void *printMatrixC(void *param){
+    printf("\nMatrix C\n");
+
+    for(int i = 0; i < M; i++){
+        for(int k = 0; k < N; k++){
+            printf("%d ", matrixC[i][k]);
+        }
+        printf("\n");
+    }
+    pthread_exit(0);
+}
 
  /* the thread */
 int main(int argc, char *argv[]) {
@@ -89,15 +100,18 @@ int main(int argc, char *argv[]) {
         printf("Error file\n");
     }
 
+    pthread_t tid; /* the thread id */
+    pthread_attr_t attr; /* set of thread attributes */
+            
+    /* get the default attributes */
+    pthread_attr_init(&attr);
+    
+    
+    //Multiplication of matrices
     int sum;
     for (int i = 0; i < M; i++) {
         for (int j = 0; j < N; j++) {
-        // sum = 0;
         
-        //     for (int k = 0; k < K; k++) {
-        //         sum = sum + matrixA[i][k] * matrixB[k][j];
-        //     }
-        //     matrixC[i][j] = sum;
             struct XY *xy = (struct XY*)malloc(sizeof(struct  XY));
             xy -> x = i;
             xy -> y = j;
@@ -110,19 +124,17 @@ int main(int argc, char *argv[]) {
             /* create the thread */
             pthread_create(&tid, &attr, runner, (void*)xy);
             /* wait for the thread to exit */
-            pthread_join(tid, NULL);
+            //pthread_join(tid, NULL);
         }
     }
 
     //Print matrix C
-    printf("\n");
+    /* wait for the thread to exit */
+    /* create the thread */
+    pthread_create(&tid, &attr, printMatrixC, NULL);
+    pthread_join(tid, NULL);
 
-    for(int i = 0; i < M; i++){
-        for(int k = 0; k < N; k++){
-               printf("%d ", matrixC[i][k]);
-        }
-        printf("\n");
-    }
+    
 
 
 
